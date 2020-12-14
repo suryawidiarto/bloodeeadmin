@@ -105,7 +105,7 @@ const DataPermintaan = ({navigation}) => {
       return (
         <ItemACC
           item={item}
-          onPress={() => {setSelectedIdACC(item.data.id); navigation.navigate('PermintaanDarah2Screen', {item_clicked: item.data.id})}}
+          onPress={() => {setSelectedIdACC(item.data.id);}}
           style={{ backgroundColor }}
         />
       );
@@ -117,7 +117,7 @@ const DataPermintaan = ({navigation}) => {
         return (
           <ItemRJC
             item={item}
-            onPress={() => {setSelectedIdRJC(item.data.id); navigation.navigate('PermintaanDarah2Screen', {item_clicked: item.data.id})}}
+            onPress={() => {setSelectedIdRJC(item.data.id);}}
             style={{ backgroundColor }}
           />
         );
