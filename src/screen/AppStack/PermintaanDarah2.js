@@ -13,7 +13,8 @@ const PermintaanDarah2 = ({route, navigation}) => {
         GolonganDarah: null,
         JumlahDarah: null,
         KeteranganLain: null,
-        NoHandphone: null
+        NoHandphone: null,
+        Alamat: null,
     });
 
     const Accept = () => {
@@ -56,7 +57,8 @@ const PermintaanDarah2 = ({route, navigation}) => {
                 <Text style={styles.deskripsi}>Golongan Darah Dibutuhkan :{dataPermintaan.GolonganDarah}</Text>
                 <Text style={styles.deskripsi}>Kantong Darah Dibutuhkan :{dataPermintaan.JumlahDarah}</Text>
                 <Text style={styles.deskripsi}>Keterangan Lain : {dataPermintaan.KeteranganLain}</Text>
-                <Text style={styles.deskripsi}>Alamat:</Text>
+                <Text style={styles.deskripsi}>NoHandphone: {dataPermintaan.NoHandphone}</Text>
+                <Text style={styles.deskripsi}>Alamat: {dataPermintaan.Alamat}</Text>
             </View>
             <View style={{justifyContent:'center', flexDirection:'row', alignContent:'center'}}>
                 <TouchableOpacity 

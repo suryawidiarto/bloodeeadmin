@@ -3,14 +3,9 @@ import {
     View,
     Text,
     StyleSheet,
-    ImageBackground,
-    ImageBackgroundBase,
-    Dimensions,
     TouchableOpacity,
     FlatList,
-    Button,
     ScrollView,
-    SafeAreaView,
 } from 'react-native';
 import database from '@react-native-firebase/database';
 import { TextInput } from 'react-native-gesture-handler';
@@ -35,7 +30,8 @@ const DataPermintaan = ({navigation}) => {
                   GolonganDarah: item.val().GolonganDarah,
                   JumlahDarah: item.val().JumlahDarah,
                   KeteranganLain: item.val().KeteranganLain,
-                  NoHandphone: item.val().NoHandphone
+                  NoHandphone: item.val().NoHandphone,
+                  Alamat: item.val().Alamat,
                 }      
                 });
                 return false;
@@ -57,7 +53,8 @@ const DataPermintaan = ({navigation}) => {
                   GolonganDarah: item.val().GolonganDarah,
                   JumlahDarah: item.val().JumlahDarah,
                   KeteranganLain: item.val().KeteranganLain,
-                  NoHandphone: item.val().NoHandphone
+                  NoHandphone: item.val().NoHandphone,
+                  Alamat: item.val().Alamat,
                 }      
                 });
                 return false;
@@ -83,7 +80,8 @@ const DataPermintaan = ({navigation}) => {
         <Text style={styles.deskripsi}>Golongan Darah Dibutuhkan :{item.data.GolonganDarah}</Text>
         <Text style={styles.deskripsi}>Kantong Darah Dibutuhkan :{item.data.JumlahDarah}</Text>
         <Text style={styles.deskripsi}>Keterangan Lain : {item.data.KeteranganLain}</Text>
-        <Text style={styles.deskripsi}>Alamat:</Text>
+        <Text style={styles.deskripsi}>NoHandphone: {item.data.NoHandphone}</Text>
+        <Text style={styles.deskripsi}>Alamat: {item.data.Alamat}</Text>
       </TouchableOpacity>
     );
 
@@ -95,7 +93,8 @@ const DataPermintaan = ({navigation}) => {
           <Text style={styles.deskripsi}>Golongan Darah Dibutuhkan :{item.data.GolonganDarah}</Text>
           <Text style={styles.deskripsi}>Kantong Darah Dibutuhkan :{item.data.JumlahDarah}</Text>
           <Text style={styles.deskripsi}>Keterangan Lain : {item.data.KeteranganLain}</Text>
-          <Text style={styles.deskripsi}>Alamat:</Text>
+          <Text style={styles.deskripsi}>NoHandphone: {item.data.NoHandphone}</Text>
+          <Text style={styles.deskripsi}>Alamat: {item.data.Alamat}</Text>
         </TouchableOpacity>
       );
     
@@ -149,19 +148,12 @@ const DataPermintaan = ({navigation}) => {
             </View>
             </View>
         </View>
-
-            
-            
-            
-            
+       
     )
 }
 
-
 export default DataPermintaan;
 
-const width = Dimensions.get('screen').width
-const width_button = width * 0.2;
 const styles = StyleSheet.create({
 
       item: {
