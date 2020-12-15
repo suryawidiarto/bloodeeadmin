@@ -73,9 +73,8 @@ const PermintaanDarah = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-        <View style={{backgroundColor:'#efefef', padding:5,flex:15, marginTop:40}}>
-            <Text style={{fontSize:20, color:'black', fontWeight:'bold', textAlign:'center'}}>Info Terkini Seputar Donor Darah</Text>
-            <TextInput placeholder="Cari" style={{textAlign:'center'}}></TextInput>
+        <View style={{backgroundColor:'#efefef', padding:5, margin:20}}>
+            <Text style={{fontSize:20, color:'black', fontWeight:'bold', textAlign:'center'}}>Data Permohonan Permintaan Darah</Text>
             <FlatList
                 data={dataPermintaan}
                 renderItem={renderItem}
@@ -128,9 +127,11 @@ const styles = StyleSheet.create({
       },
 
 
-    container:{
+      container:{
         flex:1,
-        backgroundColor:'white',
+        alignContent:'center',
+        flexDirection:'column',
+        margin:0
     },
     header: {
         marginTop:50,

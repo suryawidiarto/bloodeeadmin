@@ -5,36 +5,32 @@ import {
   Text,
   TouchableOpacity,
   Linking,
-  ToastAndroid
+  ToastAndroid,
+  TextInput,
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import database from '@react-native-firebase/database';
 
 
-const ScanQR = () => {
+const ScanQR = ({navigation}) => {
   const [scan, setScan] = useState(false);
   const [result, setResult] = useState();
   const [counter, setCounter] = useState();
+  const [lokasi, setLokasi] = useState();
+  const [tanggal, setTanggal] = useState();
 
   const onSuccess = e => {
     setResult(e.data);
     setScan(true);
   }
-  
-  useEffect(()=>{
-    getData();
-  },[result])
 
   const Post = () => {
     console.log('REF :', counter);
     database().ref(`History/${result}/DonorKe-${counter}`).update({
         Id: result,
-        Donor: 'YA',
-        Lokasi: 'PURWOKERTO',
-        GolonganDarah: 'A',
-        JumlahDarah: '1',
-        KeteranganLain: '',
+        Tanggal: tanggal,
+        Lokasi: lokasi,
     }).then(() => {
         ToastAndroid.show('Submit Data Berhasil !', ToastAndroid.SHORT);
     });
@@ -53,40 +49,55 @@ const ScanQR = () => {
     }
   }
 
-  const getData = () => {
-    try {
-        database()
-        .ref(`/counter/users/${result}`)
-        .on('value', datadb => {
-          console.log(datadb.val());
-            if(datadb.val() !== null) {
-                const data = datadb.val().key_history;
-                setCounter(data+1);
-                console.log('key counter get firebase sukses');
-                
-            }else{
-                setCounter(1);
-                console.log('key counter get firebase kosong');
-            }
-        });
-    
-    } catch(e) {
-        console.log(e);
-        setCounter(1);
-    }
-}
+useEffect(() => {
+  const onValueChange = database()
+    .ref(`/counter/users/${result}`)
+    .on('value', datadb => {
+      console.log(datadb.val());
+        if(datadb.val() !== null) {
+            const data = datadb.val().key_history;
+            setCounter(data+1);
+            console.log('key counter get firebase sukses');
+            
+        }else{
+            setCounter(1);
+            console.log('key counter get firebase kosong');
+        }
+    });
+  return () =>
+    database()
+      .ref(`/counter/users/${result}`)
+      .off('value', onValueChange);
+}, [result]);
+
 
     return scan ? (
       <View style={styles.container}>
-          { result && <Text>{result}</Text> }
-          <TouchableOpacity style={styles.buttonTouchable} onPress={()=> setScan(false)}>
-            <Text style={styles.buttonText}>SCAN LAGI</Text>
-          </TouchableOpacity>
+          { result && <Text>{result} {counter}</Text> }
+
+          <TextInput 
+                placeholder='Tanggal'
+                onChangeText={(input) => setTanggal(input)}
+                style={{borderWidth:1, marginVertical:20}}
+            />
+
+            <TextInput 
+                placeholder='Lokasi'
+                onChangeText={(input) => setLokasi(input)}
+                style={{borderWidth:1, }}
+            />
+
           <TouchableOpacity 
-            onPress={()=> {Post();setCounter(counter+1);storeData();} }
-            style={styles.buttonTouchable}> 
-                <Text style={styles.buttonText}>Submit</Text>
+            onPress={()=> {Post();setCounter(counter+1);storeData();setScan(false);} }
+            style={{margin:20, backgroundColor:'#fff', elevation:3, padding:10, borderRadius:15}}> 
+                <Text style={{textAlign:'center'}}>SUBMIT</Text>
             </TouchableOpacity>
+
+              <TouchableOpacity 
+            onPress={()=>setScan(false)}
+            style={{margin:20, backgroundColor:'#fff', elevation:3, padding:10, borderRadius:15}}>
+              <Text style={{textAlign:'center'}}>SCAN LAGI</Text>
+          </TouchableOpacity>   
       </View>
 
     ) : (
@@ -102,26 +113,10 @@ const styles = StyleSheet.create({
   container:{
       flex:1,
       justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column'
-  },  
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777'
+      alignContent:'center',
+      flexDirection:'column',
+      margin:25
   },
-  textBold: {
-    fontWeight: '500',
-    color: '#000'
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)'
-  },
-  buttonTouchable: {
-    padding: 16
-  }
 });
 
 export default ScanQR;

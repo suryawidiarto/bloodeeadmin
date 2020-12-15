@@ -125,25 +125,28 @@ const DataPermintaan = ({navigation}) => {
 
     return(
         <View style={styles.container}>
-        <View style={{backgroundColor:'#efefef', padding:5,flex:15, marginTop:40}}>
+        <View style={{backgroundColor:'#fafafa', padding:5, justifyContent:'center', alignContent:'center', flex:1}}>
             <Text style={{fontSize:20, color:'black', fontWeight:'bold', textAlign:'center'}}>DATA PERMINTAAN</Text>
-            <TextInput placeholder="Cari" style={{textAlign:'center'}}></TextInput>
-            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center'}}>
+            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:4}}>
                 <Text style={{textAlign:'center'}}>DATA ACC</Text>
             </View>
-            <FlatList
-                data={dataPermintaanACC}
-                renderItem={renderItemACC}
-                keyExtractor={item => item.data.id}
-            />
-            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center'}}>
+            <View style={{flex:1}}>
+              <FlatList
+                  data={dataPermintaanACC}
+                  renderItem={renderItemACC}
+                  keyExtractor={item => item.data.id}
+              />
+            </View>
+            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:2}}>
                 <Text style={{textAlign:'center'}}>DATA REJECT</Text>
             </View>
-            <FlatList
-                data={dataPermintaanRJC}
-                renderItem={renderItemRJC}
-                keyExtractor={item => item.data.id}
-            />    
+            <View style={{flex:1}}>
+              <FlatList
+                  data={dataPermintaanRJC}
+                  renderItem={renderItemRJC}
+                  keyExtractor={item => item.data.id}
+              />
+            </View>
             </View>
         </View>
 
@@ -161,14 +164,6 @@ const width = Dimensions.get('screen').width
 const width_button = width * 0.2;
 const styles = StyleSheet.create({
 
-    containerlist: {
-        flex:1,
-        marginTop: 5,
-        backgroundColor:'#fafafa',
-        borderRadius:5,
-        paddingTop:2,
-        elevation:2
-      },
       item: {
         padding: 10,
         marginVertical: 8,
@@ -176,78 +171,14 @@ const styles = StyleSheet.create({
         borderRadius:20,
         elevation:2,
       },
-      transaksi: {
-        fontSize: 15,
-        color:'#000'
-      },
       deskripsi: {
           fontSize:15,
       },
-      title: {
-        fontSize:20,
-        color:'white',
-        fontWeight:'bold',
-        marginBottom:10
-      },
-
-
     container:{
         flex:1,
         backgroundColor:'white',
+        justifyContent:'center',
+        alignContent:'center',
+        margin:10
     },
-    header: {
-        marginTop:50,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    footer2:{
-        flex:1,
-        paddingHorizontal:20,
-        },
-    tabbar: {
-        flex:1
-    },
-    imageBackground:{
-        width: width*0.5,
-        height: width*0.5 ,
-        alignItems:'center'
-    },
-    imageBackground2:{
-        width: width*0.25,
-        height: width*0.25,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    title: {
-        color:'black',
-        marginTop:10,
-        marginLeft:10,
-        fontWeight:'bold',
-        fontSize:20,
-        alignItems:'center'
-    },
-    money: {
-        color:'black',
-        marginTop:10,
-        marginLeft:10,
-        fontWeight:'bold',
-        fontSize:25,
-        alignItems:'center'
-    },
-    topUp:{
-        flex:2,
-        alignItems:'center'
-    },
-    button: {
-    width:width_button,
-    height:40,
-    justifyContent:'center',
-    alignItems:'center'
-    },
-    imageTopup:{
-    width: width*0.1,
-    height: width*0.1,
-    alignItems:'center'  
-    }
 })
