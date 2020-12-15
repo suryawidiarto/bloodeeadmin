@@ -40,13 +40,19 @@ const PermintaanDarah2 = ({route, navigation}) => {
     }
 
     useEffect(() => {
-        console.log(item_clicked);
-        database()
-            .ref(`/PermintaanDarah/${item_clicked}`)
-            .once('value')
-            .then(snapshot => {
-                setDataPermintaan(snapshot.val());
-            });
+        try{
+            console.log(item_clicked);
+            database()
+                .ref(`/PermintaanDarah/${item_clicked}`)
+                .once('value')
+                .then(snapshot => {
+                    setDataPermintaan(snapshot.val());
+                });
+        }
+        catch(e){
+            console.log(e);
+        }
+        
       }, []);
 
     return (

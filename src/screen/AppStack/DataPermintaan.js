@@ -17,7 +17,8 @@ const DataPermintaan = ({navigation}) => {
     const [dataPermintaanRJC, setDataPermintaanRJC] = useState([]);
     
     useEffect(() => {
-      const onValueChangeACC = database()
+      try{
+        const onValueChangeACC = database()
         .ref(`/PermintaanDarahAccepted/`)
         .on('value', snapshot => {
           const dataTemp = []
@@ -36,7 +37,6 @@ const DataPermintaan = ({navigation}) => {
                 });
                 return false;
               });
-              //console.log('Data Permintaan :',dataTemp);
               setDataPermintaanACC(dataTemp);
         });
 
@@ -59,17 +59,21 @@ const DataPermintaan = ({navigation}) => {
                 });
                 return false;
               });
-              //console.log('Data Permintaan :',dataTemp);
               setDataPermintaanRJC(dataTemp);
         });
-      return () =>
-        database()
-          .ref(`/PermintaanDarah/`)
-          .off('value', onValueChangeACC);
+        return () =>
+          database()
+            .ref(`/PermintaanDarah/`)
+            .off('value', onValueChangeACC);
 
-        database()
-          .ref(`/PermintaanDarah/`)
-          .off('value', onValueChangeRJC);
+          database()
+            .ref(`/PermintaanDarah/`)
+            .off('value', onValueChangeRJC);
+      }
+      catch(e){
+        console.log(e);
+      }
+      
     }, []);
 
     const ItemACC = ({ item, onPress, style }) => (

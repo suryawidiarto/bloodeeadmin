@@ -15,7 +15,8 @@ const PermintaanDarah = ({navigation}) => {
     const [dataPermintaan, setDataPermintaan] = useState([]);
     
     useEffect(() => {
-      const onValueChange = database()
+      try{
+        const onValueChange = database()
         .ref(`/PermintaanDarah/`)
         .on('value', snapshot => {
           const dataTemp = []
@@ -36,10 +37,15 @@ const PermintaanDarah = ({navigation}) => {
               });
               setDataPermintaan(dataTemp);
         });
-      return () =>
-        database()
-          .ref(`/PermintaanDarah/`)
-          .off('value', onValueChange);
+        return () =>
+          database()
+            .ref(`/PermintaanDarah/`)
+            .off('value', onValueChange);
+      }
+      catch(e){
+        console.log(e);
+      }
+      
     }, []);
 
     const Item = ({ item, onPress, style }) => (

@@ -40,8 +40,8 @@ const ScanQR = ({navigation}) => {
   const storeData = () => {
     try {
 
-        database().ref(`/counter/users/${result}`).update({
-            key_history: counter,
+        database().ref(`/counter/users/${result}/key-history`).update({
+            key: counter,
         });
         console.log('key counter store firebase sukses');
     } catch (e) {
@@ -49,26 +49,33 @@ const ScanQR = ({navigation}) => {
     }
   }
 
-useEffect(() => {
-  const onValueChange = database()
-    .ref(`/counter/users/${result}`)
-    .on('value', datadb => {
-      console.log(datadb.val());
-        if(datadb.val() !== null) {
-            const data = datadb.val().key_history;
-            setCounter(data+1);
-            console.log('key counter get firebase sukses');
-            
-        }else{
-            setCounter(1);
-            console.log('key counter get firebase kosong');
-        }
-    });
-  return () =>
-    database()
-      .ref(`/counter/users/${result}`)
-      .off('value', onValueChange);
-}, [result]);
+  useEffect(() => {
+    try{
+      const onValueChange = database()
+        .ref(`/counter/users/${result}/key-history`)
+        .on('value', datadb => {
+          console.log(result);
+          console.log(datadb.val());
+            if(datadb.val()) {
+                const data = datadb.val().key;
+                console.log('MASUK SINI G:',data);
+                setCounter(data+1);
+                console.log('key counter get firebase sukses');
+                
+            }else{
+                setCounter(1);
+                console.log('key counter get firebase kosong');
+            }
+        });
+      return () =>
+        database()
+          .ref(`/counter/users/${result}`)
+          .off('value', onValueChange);
+      }
+      catch(e){
+        console.log(e);
+      }
+  }, [result]);
 
 
     return scan ? (
