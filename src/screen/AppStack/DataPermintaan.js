@@ -125,9 +125,8 @@ const DataPermintaan = ({navigation}) => {
     return(
         <View style={styles.container}>
         <View style={{backgroundColor:'#fafafa', padding:5, justifyContent:'center', alignContent:'center', flex:1}}>
-            <Text style={{fontSize:20, color:'black', fontWeight:'bold', textAlign:'center'}}>DATA PERMINTAAN</Text>
-            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:4}}>
-                <Text style={{textAlign:'center'}}>DATA ACC</Text>
+            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:4,borderRadius:10, padding:5}}>
+                <Text style={{textAlign:'center'}}>Data Permohonan Permintaan Darah Disetujui</Text>
             </View>
             <View style={{flex:1}}>
               <FlatList
@@ -136,8 +135,8 @@ const DataPermintaan = ({navigation}) => {
                   keyExtractor={item => item.data.id}
               />
             </View>
-            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:2}}>
-                <Text style={{textAlign:'center'}}>DATA REJECT</Text>
+            <View style={{flexDirection:'row', backgroundColor:'#fff', justifyContent:'center', alignContent:'center', elevation:4, borderRadius:10, padding:5}}>
+                <Text style={{textAlign:'center'}}>Data Permohonan Permintaan Ditolak</Text>
             </View>
             <View style={{flex:1}}>
               <FlatList
