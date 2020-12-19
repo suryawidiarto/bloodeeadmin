@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Linking,
   ToastAndroid,
   TextInput,
 } from 'react-native';
@@ -58,7 +57,6 @@ const ScanQR = () => {
           console.log(datadb.val());
           if (datadb.val()) {
             const data = datadb.val().key;
-            console.log('MASUK SINI G:', data);
             setCounter(data + 1);
             console.log('key counter get firebase sukses');
           } else {

@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import database from '@react-native-firebase/database';
-import {TextInput} from 'react-native-gesture-handler';
 
 const PermintaanDarah = ({navigation}) => {
   const [selectedId, setSelectedId] = useState(null);
@@ -21,21 +13,27 @@ const PermintaanDarah = ({navigation}) => {
         .on('value', (snapshot) => {
           const dataTemp = [];
           snapshot.forEach((item) => {
-            dataTemp.push({
-              data: {
-                id: item.key,
-                Id: item.val().Id,
-                NamaPeminta: item.val().NamaPeminta,
-                NamaPenerima: item.val().NamaPenerima,
-                GolonganDarah: item.val().GolonganDarah,
-                JumlahDarah: item.val().JumlahDarah,
-                KeteranganLain: item.val().KeteranganLain,
-                NoHandphone: item.val().NoHandphone,
-                Alamat: item.val().Alamat,
-              },
+            item.forEach((item2) => {
+              dataTemp.push({
+                data: {
+                  IdItem: `${item2.val().Id}-${item2.key}`,
+                  IdUser: item2.val().Id,
+                  IdBranch: item2.key,
+                  NamaPeminta: item2.val().NamaPeminta,
+                  NamaPenerima: item2.val().NamaPenerima,
+                  GolonganDarah: item2.val().GolonganDarah,
+                  JumlahDarah: item2.val().JumlahDarah,
+                  KeteranganLain: item2.val().KeteranganLain,
+                  NoHandphone: item2.val().NoHandphone,
+                  Alamat: item2.val().Alamat,
+                },
+              });
+              return false;
             });
             return false;
           });
+
+          console.log('ISI DATA TEMP', dataTemp);
           setDataPermintaan(dataTemp);
         });
       return () =>
@@ -74,9 +72,10 @@ const PermintaanDarah = ({navigation}) => {
       <Item
         item={item}
         onPress={() => {
-          setSelectedId(item.data.id);
+          setSelectedId(item.data.IdItem);
           navigation.navigate('PermintaanDarah2Screen', {
-            item_clicked: item.data.id,
+            item_clicked: item.data.IdBranch,
+            item_ID: item.data.IdUser,
           });
         }}
         style={{backgroundColor}}
@@ -99,7 +98,7 @@ const PermintaanDarah = ({navigation}) => {
         <FlatList
           data={dataPermintaan}
           renderItem={renderItem}
-          keyExtractor={(item) => item.data.id}
+          keyExtractor={(item) => item.data.IdItem}
         />
       </View>
     </View>

@@ -4,7 +4,7 @@ import database from '@react-native-firebase/database';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const PermintaanDarah2 = ({route, navigation}) => {
-  const {item_clicked} = route.params;
+  const {item_clicked, item_ID} = route.params;
   const [dataPermintaan, setDataPermintaan] = useState({
     Id: null,
     NamaPeminta: null,
@@ -18,19 +18,19 @@ const PermintaanDarah2 = ({route, navigation}) => {
 
   const Accept = () => {
     database()
-      .ref(`/PermintaanDarahAccepted/${item_clicked}`)
+      .ref(`/PermintaanDarahAccepted/${item_ID}/${item_clicked}`)
       .set(dataPermintaan);
 
-    database().ref(`/PermintaanDarah/${item_clicked}`).remove();
+    database().ref(`/PermintaanDarah/${item_ID}/${item_clicked}`).remove();
     ToastAndroid.show('Permintaan Berhasil Diterima !', ToastAndroid.SHORT);
   };
 
   const Decline = () => {
     database()
-      .ref(`/PermintaanDarahRejected/${item_clicked}`)
+      .ref(`/PermintaanDarahRejected/${item_ID}/${item_clicked}`)
       .set(dataPermintaan);
 
-    database().ref(`/PermintaanDarah/${item_clicked}`).remove();
+    database().ref(`/PermintaanDarah/${item_ID}/${item_clicked}`).remove();
     ToastAndroid.show('Permintaan Berhasil Ditolak !', ToastAndroid.SHORT);
   };
 
@@ -38,7 +38,7 @@ const PermintaanDarah2 = ({route, navigation}) => {
     try {
       console.log(item_clicked);
       database()
-        .ref(`/PermintaanDarah/${item_clicked}`)
+        .ref(`/PermintaanDarah/${item_ID}/${item_clicked}`)
         .once('value')
         .then((snapshot) => {
           setDataPermintaan(snapshot.val());
