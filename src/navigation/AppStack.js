@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeComponent from '../screen/AppStack/HomeComponent';
 import ScanQR from '../screen/AppStack/ScanQR';
@@ -12,15 +11,34 @@ const Stack = createStackNavigator();
 
 const RootStack = () => {
   return (
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeComponent} options={{headerShown:false,}} />
-        <Stack.Screen name="DataPermintaanScreen" component={DataPermintaan} options={{headerShown:false,}} />
-        <Stack.Screen name="PermintaanDarahScreen" component={PermintaanDarah} options={{headerShown:false,}} />
-        <Stack.Screen name="PermintaanDarah2Screen" component={PermintaanDarah2} options={{headerShown:false,}} />
-        <Stack.Screen name="ScanQRScreen" component={ScanQR} options={{headerShown:false,}} />
-      </Stack.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeComponent}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DataPermintaanScreen"
+        component={DataPermintaan}
+        options={{title: '', headerShown: true}}
+      />
+      <Stack.Screen
+        name="PermintaanDarahScreen"
+        component={PermintaanDarah}
+        options={{title: '', headerShown: true}}
+      />
+      <Stack.Screen
+        name="PermintaanDarah2Screen"
+        component={PermintaanDarah2}
+        options={{title: '', headerShown: true}}
+      />
+      <Stack.Screen
+        name="ScanQRScreen"
+        component={ScanQR}
+        options={{title: '', headerShown: true}}
+      />
+    </Stack.Navigator>
   );
-
-}
+};
 
 export default RootStack;
