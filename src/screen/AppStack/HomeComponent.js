@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {AuthContext} from '../../auth/AuthProvider';
 
 const HomeComponent = ({navigation}) => {
+  const {logout} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <Text style={{textAlign: 'center', marginTop: 20}}>Selamat Datang</Text>
@@ -52,6 +55,19 @@ const HomeComponent = ({navigation}) => {
           }}
           onPress={() => navigation.navigate('DataPermintaanScreen')}>
           <Text style={{textAlign: 'center'}}>Data Permintaan Darah</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={{
+            borderRadius: 20,
+            backgroundColor: '#fff',
+            elevation: 2,
+            margin: 10,
+            padding: 20,
+          }}
+          onPress={() => logout()}>
+          <Text style={{textAlign: 'center'}}>Log Out</Text>
         </TouchableOpacity>
       </View>
     </View>
